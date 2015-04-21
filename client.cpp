@@ -1,8 +1,11 @@
-/*
- * echoclient.c - An echo client
+
+
+/* echoclient.c - An echo client
  */
 /* $begin echoclientmain */
+extern "C" {
 #include "csapp.h"
+};
 
 int main(int argc, char **argv) 
 {
