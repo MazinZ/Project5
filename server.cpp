@@ -2,15 +2,21 @@
  * echoserveri.c - An iterative echo server 
  */ 
 /* $begin echoserverimain */
-
+using namespace std;
+#include <iostream>
+#include <typeinfo>
 extern "C" {
 #include "csapp.h"
 };
 
 void echo(int connfd);
 
+
+
+
 int main(int argc, char **argv) 
 {
+    int secretKey;
     int listenfd, connfd, port;
     socklen_t clientlen;
     struct sockaddr_in clientaddr;
@@ -33,10 +39,23 @@ int main(int argc, char **argv)
 	haddrp = inet_ntoa(clientaddr.sin_addr);
 	printf("server connected to %s (%s)\n", hp->h_name, haddrp);
 
-//	echo(connfd);
+	 echo(connfd);
 
 	Close(connfd);
     }
     exit(0);
 }
+
+void echo(int connfd){
+    size_t n;
+    char buf[MAXLINE];
+    rio_t rio;
+
+    Rio_readinitb(&rio, connfd);
+   while((n = Rio_readlineb(&rio, buf, MAXLINE)) != 0) {
+        memcpy(&secretKey, buf, sizeof(secretKey));
+        printf("server received %d bytes\n", n);
+        Rio_writen(connfd, buf, n); }
+    }
+
 /* $end echoserverimain */

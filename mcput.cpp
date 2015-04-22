@@ -5,6 +5,29 @@ extern "C" {
 #include "csapp.h"
 };
 
+/*struct dataStruct{
+	public:
+		dataStruct(string n, string v)
+		{
+			name = n;
+			value = v;	
+		}
+		string get_name()
+		{
+			return name;
+		}
+		string get_value() {
+			return value;
+		}
+		void set_value(string v){
+			value = v;
+		}
+	private:
+		string name;
+		string value;
+		
+};*/
+
 int main(int argc, char **argv) 
 {
 	int clientfd, port, key;
@@ -25,7 +48,7 @@ int main(int argc, char **argv)
 
 	while (Fgets(buf, MAXLINE, stdin) != NULL) {
 	Rio_writen(clientfd, buf, strlen(buf));
-	Rio_readlineb(&rio, buf, MAXLINE);
+	Rio_readnb(&rio, buf, MAXLINE);
 	Fputs(buf, stdout);
 	}
 	Close(clientfd); //line:netp:echoclient:close
